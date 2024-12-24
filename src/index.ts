@@ -33,7 +33,6 @@ app.use(cors());
 // Connect to MongoDB
 connectDB();
 
-
 app.use('/vehicles', vehicleRoutes);
 app.use('/auth', authRoutes);
 app.use('/students', studentRoutes);
@@ -44,8 +43,6 @@ app.use('/exception-pickups', exceptionPickupRoutes);
 app.use('/schools', schoolRoutes);
 app.use('/student-pickup-persons', studentPickupPersonRoutes);
 
-
-
 // Root route
 app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to the School Management API!');
@@ -53,15 +50,6 @@ app.get('/', (req: Request, res: Response) => {
 
 // Error handling middleware
 app.use(errorHandler);
-
-// Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
-
-
 
 // Auth routes
 app.use('/auth', authRoutes);
@@ -71,7 +59,7 @@ app.use('/auth', authRoutes);
 app.use('/students', studentRoutes);
 
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

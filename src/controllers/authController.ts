@@ -3,7 +3,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import User, { IUser } from '../models/User';
+import User, { IUser } from '../models/user';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallbackSecret';
 
@@ -28,7 +28,7 @@ export const signup = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     // 4. Create the user
-    const newUser = new User<IUser>({
+    const newUser = new User({
       username,
       email,
       password: hashedPassword,
@@ -62,7 +62,7 @@ export const login = async (req: Request, res: Response) => {
     // 2. Find user by username
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(401).json({ error: 'Invalid username or password.' });
+      return res.status(404).json({ error: 'User not found.' });
     }
 
     // 3. Compare passwords
